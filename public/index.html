@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beko's VPM Listing</title>
+    <meta
+      http-equiv="refresh"
+      content="0; url=vcc://vpm/addRepo?url=https://vpm.bekobeko.net/index.json"
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          'Hiragino Kaku Gothic ProN',
+          sans-serif;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 2rem;
+        box-sizing: border-box;
+        text-align: center;
+        background: #fafafa;
+        color: #1a1a1a;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #16131a;
+          color: #f2eef5;
+        }
+      }
+      main {
+        max-width: 28rem;
+      }
+      h1 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        line-height: 1.6;
+        opacity: 0.85;
+      }
+      a.button {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.75rem 1.75rem;
+        border-radius: 999px;
+        background: #ec4899;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      a.button:hover {
+        background: #db2777;
+      }
+      code {
+        display: block;
+        margin-top: 1rem;
+        font-size: 0.75rem;
+        opacity: 0.6;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Beko's VPM Listing を VCC に追加</h1>
+      <p>VRChat Creator Companion (VCC) を起動しています。自動で開かない場合は下のボタンを押してください。</p>
+      <a class="button" href="vcc://vpm/addRepo?url=https://vpm.bekobeko.net/index.json">VCCで開く</a>
+      <code>https://vpm.bekobeko.net/index.json</code>
+    </main>
+    <script>
+      location.href = 'vcc://vpm/addRepo?url=https://vpm.bekobeko.net/index.json';
+    </script>
+  </body>
+</html>

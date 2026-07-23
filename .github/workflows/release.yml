@@ -4,9 +4,11 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch: {}
 
 jobs:
   build-and-release:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -55,6 +57,9 @@ jobs:
 
   update-listing:
     needs: build-and-release
+    if: |
+      always() &&
+      (needs.build-and-release.result == 'success' || needs.build-and-release.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: read
