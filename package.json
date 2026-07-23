@@ -1,0 +1,17 @@
+{
+  "name": "net.bekobeko.utilitytools",
+  "displayName": "Beko's Utility Tools",
+  "version": "0.1.0",
+  "unity": "2022.3",
+  "description": "beko's utility tools for Unity/Modular Avatar.",
+  "author": {
+    "name": "beko"
+  },
+  "license": "MIT",
+  "documentationUrl": "https://bekobeko.net/works/beko-utility-tools/docs/",
+  "changelogUrl": "https://github.com/beko-kerbecotton/vrc-utility-tools/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/beko-kerbecotton/vrc-utility-tools/blob/main/LICENSE.md",
+  "vpmDependencies": {
+    "nadena.dev.modular-avatar": ">=1.17.0"
+  }
+}

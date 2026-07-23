@@ -1,0 +1,79 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve and verify version
+        id: version
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          version="${tag#v}"
+          pkg_version=$(node -p "require('./package.json').version")
+          if [ "$version" != "$pkg_version" ]; then
+            echo "Tag version ($version) does not match package.json version ($pkg_version)." >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build release archive
+        run: |
+          set -euo pipefail
+          zip_name="net.bekobeko.utilitytools-${{ steps.version.outputs.version }}.zip"
+          zip -r "$zip_name" . \
+            -x ".git/*" \
+            -x ".github/*" \
+            -x ".gitignore" \
+            -x "Tests/*" \
+            -x "Tests.meta"
+          sha256sum "$zip_name" > "$zip_name.sha256"
+          echo "ZIP_NAME=$zip_name" >> "$GITHUB_ENV"
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "${GITHUB_REF_NAME}" \
+            "$ZIP_NAME" \
+            "$ZIP_NAME.sha256" \
+            package.json \
+            --title "${{ steps.version.outputs.version }}" \
+            --notes "See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+
+  update-listing:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build index.json
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node .github/scripts/build-index.mjs
+
+      - name: Deploy listing to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: .github/release
+          command: deploy

@@ -1,0 +1,15 @@
+{
+    "name": "net.bekobeko.utilitytools.editor.tests",
+    "rootNamespace": "net.bekobeko.utilitytools.tests",
+    "references": [
+        "net.bekobeko.utilitytools.editor",
+        "nadena.dev.modular-avatar.core"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "autoReferenced": false
+}
