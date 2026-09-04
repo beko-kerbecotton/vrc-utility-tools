@@ -3,13 +3,24 @@
     "rootNamespace": "net.bekobeko.utilitytools.tests",
     "references": [
         "net.bekobeko.utilitytools.editor",
-        "nadena.dev.modular-avatar.core"
+        "net.bekobeko.utilitytools.runtime",
+        "nadena.dev.modular-avatar.core",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
     ],
     "includePlatforms": [
         "Editor"
     ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
     ],
-    "autoReferenced": false
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
