@@ -12,6 +12,7 @@
   "changelogUrl": "https://github.com/beko-kerbecotton/vrc-utility-tools/blob/main/CHANGELOG.md",
   "licensesUrl": "https://github.com/beko-kerbecotton/vrc-utility-tools/blob/main/LICENSE.md",
   "vpmDependencies": {
-    "nadena.dev.modular-avatar": ">=1.17.0"
+    "nadena.dev.modular-avatar": ">=1.17.0",
+    "nadena.dev.ndmf": ">=1.11.0 <2.0.0-a"
   }
 }

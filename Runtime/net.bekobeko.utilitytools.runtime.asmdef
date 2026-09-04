@@ -1,21 +1,17 @@
 {
-    "name": "net.bekobeko.utilitytools.editor",
+    "name": "net.bekobeko.utilitytools.runtime",
     "rootNamespace": "net.bekobeko.utilitytools",
     "references": [
-        "nadena.dev.modular-avatar.core",
-        "net.bekobeko.utilitytools.runtime",
-        "nadena.dev.ndmf",
         "nadena.dev.ndmf.runtime"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
 }
+
