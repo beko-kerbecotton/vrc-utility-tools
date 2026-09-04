@@ -58,3 +58,7 @@ Claude.md.meta
 
 # old files
 old~/
+
+# Cloudflare Pages 用。Unityのコンテンツではないので meta を追跡しない
+public.meta
+public/**/*.meta
