@@ -10,7 +10,11 @@ namespace net.bekobeko.utilitytools.plugin
         {
             var avatarRoot = context.AvatarRootTransform;
             var result = ScaleBakeSolver.Solve(avatarRoot);
-            TransformBaker.Bake(avatarRoot, result);
+            // Mesh補正にはBake前の行列が必要なため、Transformを書き換える前に保存する。
+            var snapshot = ScaleBakeSnapshot.Capture(avatarRoot);
+            TransformBaker.Bake(avatarRoot, result, snapshot);
+            MeshBaker.Bake(avatarRoot, result, snapshot);
+            // 生成MeshはNDMFの自動シリアライズに任せ、依存下限に無い可能性があるIAssetSaverは使わない。
             RemoveComponents(avatarRoot);
         }
 

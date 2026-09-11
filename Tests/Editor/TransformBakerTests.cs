@@ -33,7 +33,7 @@ namespace net.bekobeko.utilitytools.tests
             AddBake(bakeRoot, scale);
             oracleRoot.localScale = scale;
 
-            TransformBaker.Bake(bakeRoot, ScaleBakeSolver.Solve(bakeRoot));
+            TransformBaker.Bake(bakeRoot, ScaleBakeSolver.Solve(bakeRoot), ScaleBakeSnapshot.Capture(bakeRoot));
 
             AssertVector(bakeChild.position, oracleChild.position);
         }
@@ -54,7 +54,7 @@ namespace net.bekobeko.utilitytools.tests
             oracleRoot.localScale = rootScale;
             oracleMiddle.localScale = middleScale;
 
-            TransformBaker.Bake(bakeRoot, ScaleBakeSolver.Solve(bakeRoot));
+            TransformBaker.Bake(bakeRoot, ScaleBakeSolver.Solve(bakeRoot), ScaleBakeSnapshot.Capture(bakeRoot));
 
             AssertVector(bakeMiddle.position, oracleMiddle.position);
             AssertVector(bakeLeaf.position, oracleLeaf.position);
@@ -81,7 +81,7 @@ namespace net.bekobeko.utilitytools.tests
             var transforms = new[] { bakeRoot, bakeFrame, bakeChild, bakeLeaf };
             var originalScales = CaptureLocalScales(transforms);
 
-            TransformBaker.Bake(bakeRoot, ScaleBakeSolver.Solve(bakeRoot));
+            TransformBaker.Bake(bakeRoot, ScaleBakeSolver.Solve(bakeRoot), ScaleBakeSnapshot.Capture(bakeRoot));
 
             AssertVector(bakeChild.position, oracleChild.position);
             AssertVector(bakeLeaf.position, oracleLeaf.position);
@@ -100,7 +100,7 @@ namespace net.bekobeko.utilitytools.tests
             var transforms = new[] { root, frame, child };
             var originalRotations = CaptureLocalRotations(transforms);
 
-            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root));
+            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root), ScaleBakeSnapshot.Capture(root));
 
             AssertLocalRotations(transforms, originalRotations);
         }
@@ -115,7 +115,7 @@ namespace net.bekobeko.utilitytools.tests
             var originalLocalPosition = frame.localPosition;
             var originalPosition = frame.position;
 
-            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root));
+            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root), ScaleBakeSnapshot.Capture(root));
 
             Assert.That(frame.localPosition, Is.EqualTo(originalLocalPosition));
             Assert.That(frame.position, Is.EqualTo(originalPosition));
@@ -135,7 +135,7 @@ namespace net.bekobeko.utilitytools.tests
             var originalChildLocalPosition = unaffectedChild.localPosition;
             var originalChildPosition = unaffectedChild.position;
 
-            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root));
+            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root), ScaleBakeSnapshot.Capture(root));
 
             Assert.That(unaffected.localPosition, Is.EqualTo(originalLocalPosition));
             Assert.That(unaffected.position, Is.EqualTo(originalPosition));
@@ -157,7 +157,7 @@ namespace net.bekobeko.utilitytools.tests
             var localScales = CaptureLocalScales(transforms);
 
             var result = ScaleBakeSolver.Solve(root);
-            TransformBaker.Bake(root, result);
+            TransformBaker.Bake(root, result, ScaleBakeSnapshot.Capture(root));
 
             Assert.That(result.HasErrors, Is.True);
             AssertLocalPositions(transforms, localPositions);
@@ -177,7 +177,7 @@ namespace net.bekobeko.utilitytools.tests
             var localRotations = CaptureLocalRotations(transforms);
             var localScales = CaptureLocalScales(transforms);
 
-            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root));
+            TransformBaker.Bake(root, ScaleBakeSolver.Solve(root), ScaleBakeSnapshot.Capture(root));
 
             AssertLocalPositions(transforms, localPositions);
             AssertLocalRotations(transforms, localRotations);
